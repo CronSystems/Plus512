@@ -1,7 +1,10 @@
 package esy.es.cronsystems.plus512;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,9 +29,33 @@ public class MainActivity extends AppCompatActivity
     private MyButton[][] mButtons;
 
     private Game game;
+    private String FIRST_START;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SharedPreferences getPrefs = PreferenceManager
+                        .getDefaultSharedPreferences(getBaseContext());
+
+                boolean isFirstStart = getPrefs.getBoolean(FIRST_START, true);
+
+                if (isFirstStart) {
+                    Intent i = new Intent(MainActivity.this, HelpIntro.class);
+                    startActivity(i);
+
+                    SharedPreferences.Editor e = getPrefs.edit();
+                    e.putBoolean(FIRST_START, false);
+                    e.apply();
+                }
+            }
+        });
+
+        // Start the thread
+        t.start();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

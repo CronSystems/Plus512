@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Plus512</string>
+    <string name="welcome_intro">Welcome to Plus512</string>
 </resources>
