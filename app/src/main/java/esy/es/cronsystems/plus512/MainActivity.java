@@ -8,6 +8,8 @@ import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.AlphaAnimation;
@@ -27,7 +29,8 @@ public class MainActivity extends AppCompatActivity
     private TextView mUpText, mLowText;
     GridLayout mGridLayout;
     private MyButton[][] mButtons;
-
+    private String result_low;
+    private String result_up;
     private Game game;
     private String FIRST_START;
 
@@ -88,7 +91,10 @@ public class MainActivity extends AppCompatActivity
 
         mUpText = (TextView) findViewById(R.id.upper_scoreboard);
         mLowText = (TextView) findViewById(R.id.lower_scoreboard);
-
+        mUpText.setText(R.string.game_bot);
+        mLowText.setText(R.string.game_you);
+        result_up = mUpText.getText().toString();
+        result_low = mLowText.getText().toString();
         //расположим кнопки с цифрами равномерно внутри mGridLayout
         mGridLayout.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -149,8 +155,8 @@ public class MainActivity extends AppCompatActivity
     //*************************************************************************
     @Override
     public void changeLabel(boolean upLabel, int points) {
-        if (upLabel) mUpText.setText(String.format("Бот: %d", points));
-        else mLowText.setText(String.valueOf(String.format("Вы: %d", points)));
+        if (upLabel) mUpText.setText(result_up + points);
+        else mLowText.setText(result_low + points);
     }
 
     @Override
@@ -178,10 +184,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onResult(int playerOnePoints, int playerTwoPoints) {
 
-        String text;
-        if (playerOnePoints > playerTwoPoints) text = "вы победили";
-        else if (playerOnePoints < playerTwoPoints) text = "бот победил";
-        else text = "ничья";
+        int text;
+
+        if (playerOnePoints > playerTwoPoints) text = R.string.win;
+        else if (playerOnePoints < playerTwoPoints) text = R.string.lose;
+        else text = R.string.nobody;
 
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
 
@@ -220,5 +227,33 @@ public class MainActivity extends AppCompatActivity
                 currentBut.setAlpha(0);
             }
         }, 800);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_help) {
+            Intent intent = new Intent(MainActivity.this, HelpIntro.class);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.action_about) {
+            Intent intent = new Intent(MainActivity.this, AboutActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

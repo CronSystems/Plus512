@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Plus512</string>
+    <string name="about_header">Plus512 v1.0.1.2</string>
+    <string name="welcome_intro">Добро пожаловать</string>
+    <string name="help_intro_5">Давайте начнем!</string>
+    <string name="help_intro_4">И так далее</string>
+    <string name="help_intro_3">Компьютер делает свой аналогичный ход</string>
+    <string name="help_intro_2">У вас есть ряд синих квадратов. вы должны нажать на квадрат с каким-либо значением чтобы сделать ход. Значение на квадратике прибавляется к вашим очкам.</string>
+    <string name="help_intro_1">Мы покажем вам как играть в эту игру.</string>
+    <string name="action_about">О программе</string>
+    <string name="action_help">Помощь</string>
+    <string name="copyright">(с) CronSystems, 2016. Все права защищены.\nОтдельная блягодарность livem0r</string>
+    <string name="game_bot">Бот:  </string>
+    <string name="game_you">Вы:  </string>
+    <string name="lose">Вы проиграли!</string>
+    <string name="nobody">Ничья!</string>
+    <string name="win">Вы выиграли!</string>
+</resources>

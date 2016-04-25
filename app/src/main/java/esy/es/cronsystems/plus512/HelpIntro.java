@@ -10,10 +10,11 @@ public class HelpIntro extends AppIntro2 {
     public void init(Bundle savedInstanceState) {
 
 // Здесь указываем количество слайдов, например нам нужно 3
-        addSlide(IntroSlide.newInstance(R.layout.)); //
+        addSlide(IntroSlide.newInstance(R.layout.intro_1)); //
         addSlide(IntroSlide.newInstance(R.layout.intro_2));
         addSlide(IntroSlide.newInstance(R.layout.intro_3));
-
+        addSlide(IntroSlide.newInstance(R.layout.intro_4));
+        addSlide(IntroSlide.newInstance(R.layout.intro_5));
     }
 
     private void loadMainActivity(){
